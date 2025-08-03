@@ -111,6 +111,15 @@ contract WhisperNFT is ERC721, ReentrancyGuard {
         return _isForgotten[tokenId];
     }
 
+    /**
+    * @dev Returns the total number of tokens minted so far.
+    * This represents the current highest token ID.
+    * @return The total supply.
+    */
+    function totalSupply() public view returns (uint256) {
+        return _currentTokenId;
+    }
+
     function tokenURI(uint256 tokenId) public view override validTokenId(tokenId) returns (string memory) {
         if (block.timestamp >= _expiryTimes[tokenId] || _isForgotten[tokenId]) {
             return "data:text/plain;charset=utf-8,This whisper has faded away.";
